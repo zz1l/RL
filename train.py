@@ -17,19 +17,19 @@ def train():
     model = SAC(
       "MlpPolicy",
       env,
-      policy_kwargs=dict(net_arch=[512, 512, 512]),
+      policy_kwargs=dict(net_arch=[256, 256]),
       verbose=1,
       device="cuda" if torch.cuda.is_available() else "cpu",
       tensorboard_log=log_path,
       learning_rate=3e-4,
       buffer_size=1000000,
-      batch_size=2048,
+      batch_size=1024,
       learning_starts=10000,
       tau=0.005,
       gamma=0.99,
       ent_coef="auto",
       train_freq=1,
-      gradient_steps=4
+      gradient_steps=2
 )
 
     checkpoint_callback = CheckpointCallback(
