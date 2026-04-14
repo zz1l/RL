@@ -122,7 +122,7 @@ class GomokuEnv:
         for i in range(7):
             p.resetJointState(self.robot_id, i, self.ready_pos[i])
         
-        # 3. ⭐ 清除末端和基座的残余速度
+        # 3. 清除末端和基座的残余速度
         p.resetBaseVelocity(self.robot_id, [0,0,0], [0,0,0])
 
 # --- 人类交互解析工具 ---

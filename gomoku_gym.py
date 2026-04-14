@@ -99,15 +99,15 @@ class GomokuArmEnv(gym.Env):
         if dist < 0.1 and is_open:
             reward += 0.5
         
-        # ⭐ 新增：闭合夹爪（抓取阶段）
+        # 闭合夹爪（抓取阶段）
         if dist < 0.05 and not is_open:
             reward += 5.0
         
-        # ⭐ 抓住提升
+        # 抓住提升
         if dist < 0.05 and piece[2] > 0.05:
             reward += 20
         
-        # ⭐ 抬起连续奖励
+        # 抬起连续奖励
         reward += piece[2] * 10
         
         # 动作惩罚
