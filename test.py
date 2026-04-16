@@ -22,7 +22,7 @@ SLOW_MODE = True   # 是否慢速播放（方便观察）
 def test():
     # 1. 检查模型文件
     if not os.path.exists(MODEL_PATH):
-        raise FileNotFoundError(f"模型不存在: {MODEL_PATH}")
+        raise FileNotFoundError(f"模型不存在: {MODEL_PATH}.zip")
 
     print("加载环境...")
     env = GomokuArmEnv()
