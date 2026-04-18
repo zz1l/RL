@@ -15,7 +15,7 @@ def make_env():
 def train():
     # ===== 向量化 + 归一化 =====
     env = DummyVecEnv([make_env])
-    env = VecNormalize(env, norm_obs=True, norm_reward=True)
+    env = VecNormalize(env, norm_obs=True, norm_reward=False)
 
     model_path = "models/SAC_Gomoku"
     log_path = "logs/tensorboard"
@@ -25,19 +25,19 @@ def train():
     model = SAC(
         "MlpPolicy",
         env,
-        policy_kwargs=dict(net_arch=[256, 256]),
+        policy_kwargs=dict(net_arch=[512,512,256]),
         verbose=1,
         device="cuda" if torch.cuda.is_available() else "cpu",
         tensorboard_log=log_path,
         learning_rate=3e-4,
-        buffer_size=500000,
-        batch_size=256,
-        learning_starts=5000,
+        buffer_size=1500000,
+        batch_size=1024,
+        learning_starts=20000,
         tau=0.005,
         gamma=0.99,
         ent_coef="auto",
         train_freq=1,
-        gradient_steps=4
+        gradient_steps=8
     )
 
     checkpoint_callback = CheckpointCallback(
